@@ -25,16 +25,22 @@ body {
 }
 
 .box {
-    border: 1px solid #cccccc;
+    border: 1px solid rgba(221, 221, 221, 0.416);
     font-size: 2.5em;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
+    cursor: pointer;
 }
 
 .box[data-state="active"] {
-    
+    border: 1px solid #fff;
+}
+
+.box[data-state="checked"] {
+    border: none;
+    background-color: rgba(250, 121, 121, 0.815);
 }
 
 .number-container {

@@ -2,11 +2,19 @@
 const boxContainer = document.querySelector("[data-box-container]");
 const numberContainer = document.querySelector("[data-number-container]");
 const numbers = document.querySelectorAll(".number");
+const boxes = document.querySelectorAll(".box");
 
 // Initialize
 init();
 
 // Events
+boxes.forEach((box) => {
+  box.addEventListener("click", (e) => {
+    if (getFilledBoxes().length === 25) {
+      box.dataset.state = "checked";
+    }
+  });
+});
 
 // Functions
 function init() {
@@ -29,12 +37,10 @@ function stopInteraction() {
   document.removeEventListener("keydown", handleKeyPress);
 }
 
-function randomGenerate() {
-    
-}
+function randomGenerate() {}
 
 function pressKey(key) {
-  const boxes = Array.from(getFilledBoxes());
+  const boxes = getFilledBoxes();
   if (boxes.findIndex((v) => v.dataset.letter === key.toLowerCase()) > -1) {
     // already exist
     return;
@@ -45,20 +51,23 @@ function pressKey(key) {
     nextBox.dataset.letter = key.toLowerCase();
     nextBox.textContent = key;
     nextBox.dataset.state = "active";
-    numberContainer.removeChild(numberContainer.querySelector(`[data-key="${key}"]`));
+
+    numberContainer.removeChild(
+      numberContainer.querySelector(`[data-key="${key}"]`)
+    );
   }
 }
 
 function handleKeyPress(e) {
   if (e.key === "Enter") return console.log("Clicked Enter");
 
-  if (e.key === "Backspace") return removeLastElement();
+  //   if (e.key === "Backspace") return removeLastElement();
 
   if (e.key.match(/^\d$/)) return pressKey(e.key);
 }
 
 function removeLastElement() {
-  const boxes = Array.from(getFilledBoxes());
+  const boxes = getFilledBoxes();
   if (boxes.length === 0) return;
 
   const lastBox = boxes[boxes.length - 1];
@@ -68,7 +77,7 @@ function removeLastElement() {
 }
 
 function getFilledBoxes() {
-  return boxContainer.querySelectorAll("[data-letter]");
+  return Array.from(boxContainer.querySelectorAll("[data-letter]"));
 }
 
 function getNumberBoxes() {
