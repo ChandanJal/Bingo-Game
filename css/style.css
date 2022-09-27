@@ -14,6 +14,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #262626;
+    width: 100%;
 }
 
 .box-container{ 
@@ -30,4 +31,28 @@ body {
     justify-content: center;
     align-items: center;
     color: white;
+}
+
+.box[data-state="active"] {
+    
+}
+
+.number-container {
+    display: grid;
+    grid-template-columns: repeat(25, 2em);
+    position: absolute;
+    bottom: 1em;
+    place-items: center;
+    place-content: center;
+}
+
+.number {
+    cursor: pointer;
+    height: 2em;
+    width: 2em;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
 }
